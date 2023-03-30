@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "mr-seq"
+version = "0.1.0"
+description = ""
+authors = ["Christophe Chênes <christophe.chenes@gmail.com>"]
+readme = "README.md"
+packages = [{include = "mr_seq", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9, <3.11"
+black = "^23.1.0"
+llvmlite = "^0.39.1"
+numba = "^0.56.4"
+numpy = "<1.24"
+pypulseq = {git = "https://github.com/Cwis/pypulseq.git", rev = "negative-gyromagnetic-ratio"}
+pyyaml = "^6.0"
+pre-commit = "^3.2.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
