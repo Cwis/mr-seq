@@ -1,6 +1,6 @@
 """GammaMRI simulator physical setup"""
 
-from gammamri_simulator.configuration import Configuration
+from mr_seq.configuration import Configuration
 
 
 class PhysicalSetup(Configuration):

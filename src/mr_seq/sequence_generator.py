@@ -8,6 +8,8 @@ author: cc
 
 import os
 
+from importlib.metadata import version
+
 import numpy as np
 import pypulseq as pp
 import yaml
@@ -15,6 +17,10 @@ from matplotlib import pyplot as plt
 
 from mr_seq.pulse_seq import PulseSeq
 from mr_seq.sequence import Sequence
+
+from mr_seq.sequences.sequences import Sequences as seqs
+
+# from mr_seq.sequences.gre_sequence import generate_gre
 
 """
 # FOR SPIRAL
@@ -35,12 +41,18 @@ from mr_seq.physical_setup import PhysicalSetup
 
 
 class SequenceGenerator:
-    _sequence_types = ["gre", "spiral", "border"]
     PRECISION = 5
     MS_CONVERT = 1e3
 
+    def version():
+        v = version("mr-seq")
+        return v
+
+    def availableSequences():
+        return seqs.SEQUENCE_TYPES
+
     @classmethod
-    def generate_sequence(
+    def generate(
         self,
         sequence_type: str,
         matrix_shape: tuple,
@@ -48,24 +60,34 @@ class SequenceGenerator:
         outdir: str,
         physics_configuration_filename: str,
         timestep: int = -1,
+        verbal: bool = False,
     ):
-        if not sequence_type in self._sequence_types:
-            raise Exception(
-                f"Unknown sequence type '{sequence_type}',"
-                + "sequence types allowed are: {self.SEQUENCE_TYPE}"
-            )
-        if sequence_type == "gre":
-            return self.generate_gre_sequence(
-                matrix_shape, title, outdir, physics_configuration_filename, timestep
-            )
-        elif sequence_type == "spiral":
-            return self.generate_spiral_sequence(
-                matrix_shape, title, outdir, physics_configuration_filename, timestep
-            )
-        elif sequence_type == "border":
-            return self.generate_border_sequence(
-                matrix_shape, title, outdir, physics_configuration_filename, timestep
-            )
+        return seqs.generate_sequence(
+            sequence_type,
+            matrix_shape,
+            title,
+            outdir,
+            physics_configuration_filename,
+            timestep,
+            verbal,
+        )
+        # if not sequence_type in self._sequence_types:
+        # raise Exception(
+        # f"Unknown sequence type '{sequence_type}',"
+        # + "sequence types allowed are: {self.SEQUENCE_TYPE}"
+        # )
+        # if sequence_type == "gre":
+        # return self.generate_gre(
+        # matrix_shape, title, outdir, physics_configuration_filename, timestep
+        # )
+        # elif sequence_type == "spiral":
+        # return self.generate_spiral_sequence(
+        # matrix_shape, title, outdir, physics_configuration_filename, timestep
+        # )
+        # elif sequence_type == "border":
+        # return self.generate_border_sequence(
+        # matrix_shape, title, outdir, physics_configuration_filename, timestep
+        # )
 
     @classmethod
     def generate_gre_sequence(

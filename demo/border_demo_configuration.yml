@@ -1,0 +1,15 @@
+title: Physical setup for the border demo example of mr-seq
+gyro: 1.37e6 # Hz/T
+b_zero: 0.05 # T
+timestep: 20e-6 # s
+adc_dead_time: 10e-6 # s
+grad_raster_time: 20e-6 # s
+grad_unit: "mT/m"
+max_grad: 20
+max_slew: 50
+rf_dead_time: 100e-6 # s
+rf_raster_time: 1e-6 # s
+rf_ringdown_time: 30e-6 # s
+rise_time: 0 # s
+slew_unit: "T/m/s"
+loc_spacing: 0.00429 # m
