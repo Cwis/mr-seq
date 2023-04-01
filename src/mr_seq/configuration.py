@@ -25,7 +25,7 @@ class Configuration:
                 except yaml.YAMLError as exc:
                     raise Exception(
                         "Error reading the configuration file: "
-                        + f"{configuration_filename}"
+                        + f"{self.configuration_filename}"
                     ) from exc
                 return self.check_configuration()
         else:

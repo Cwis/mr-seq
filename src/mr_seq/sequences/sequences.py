@@ -1,41 +1,39 @@
-from mr_seq.sequences import gre_sequence
+from pathlib import Path
+import yaml
+
+from mr_seq.configuration import Configuration
 
 
-class Sequences:
-    SEQUENCE_TYPES = ["gre", "spiral", "border"]
+class Sequences(Configuration):
+    __default_sequences_filename = "configurations/sequences.yml"
 
-    @classmethod
-    def generate_sequence(
-        self,
-        sequence_type: str,
-        matrix_shape: tuple,
-        title: str,
-        outdir: str,
-        physics_configuration_filename: str,
-        timestep: int = -1,
-        verbal: bool = False,
-    ):
-        if not sequence_type in self.SEQUENCE_TYPES:
-            raise Exception(
-                f"Unknown sequence type '{sequence_type}',"
-                + "sequence types allowed are: {SEQUENCE_TYPES}"
-            )
-        if sequence_type == "gre":
-            return gre_sequence.generate_gre(
-                matrix_shape,
-                title,
-                outdir,
-                physics_configuration_filename,
-                timestep,
-                verbal,
-            )
-        elif sequence_type == "spiral":
-            return False
-            # return self.generate_spiral_sequence(
-            # matrix_shape, title, outdir, physics_configuration_filename, timestep
-            # )
-        elif sequence_type == "border":
-            return False
-            # return self.generate_border_sequence(
-            # matrix_shape, title, outdir, physics_configuration_filename, timestep
-            # )
+    SEQUENCE_TYPES = None
+    SEQUENCE_GENERATORS = None
+
+    def check_configuration(self) -> bool:
+        print("Check seq config")
+        return True
+
+    def __init__(self, configuration_filename: str = ""):
+        # read the configuration file containing the available sequences
+
+        self.configuration_filename: str = configuration_filename
+        if configuration_filename == "":
+            self.configuration_filename = self.__default_sequences_filename
+        self.read_configuration()
+
+        '''
+        seq_configuration_path = Path(configuration_filename)
+        if seq_configuration_path.is_file():
+            with open(seq_configuration_path, "r") as seq_configuration_file:
+                try:
+                    seq_configuration = yaml.safe_load(seq_configuration_file)
+                    # TODO read sequences from configuration file
+                except yaml.YAMLError as exc:
+                    raise Exception(
+                        "Error reading the sequences configuration file: "
+                        + f"{seq_configuration_file}"
+                    ) from exc
+        else:
+            raise Exception(f"Error reading the sequence configuration file: invalid path ({seq_configuration_path})")
+        '''
