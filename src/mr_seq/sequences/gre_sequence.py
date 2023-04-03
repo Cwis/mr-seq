@@ -6,13 +6,18 @@ from matplotlib import pyplot as plt
 
 from mr_seq.pulse_seq import PulseSeq
 from mr_seq.sequence import Sequence
+from mr_seq.waveforms import *
 
 from mr_seq.physical_setup import PhysicalSetup
 
 
 class Sequence_gre:
-    def check(self):
-        return "Sequence_gre: checked!"
+    def __init__(self, precision: int = 5):
+        self.precision = precision
+        self.ms_convert = 1e3
+
+    def check(self) -> bool:
+        return True
 
     def generate(
         self,
@@ -51,6 +56,7 @@ class Sequence_gre:
 
         # Init the system with the physics configuration
         system = pp.Opts(
+            B0=ps.b_zero,
             adc_dead_time=ps.adc_dead_time,
             gamma=ps.gamma,
             grad_raster_time=raster_time,
@@ -121,7 +127,7 @@ class Sequence_gre:
             gz,
             os.path.join(waveform_dir, "rf.yml"),
             raster_time,
-            self.PRECISION,
+            self.precision,
             ps.gamma,
         )
 
@@ -138,7 +144,7 @@ class Sequence_gre:
             gx,
             os.path.join(waveform_dir, "gx.yml"),
             raster_time,
-            self.PRECISION,
+            self.precision,
             ps.gamma,
         )
 
@@ -156,7 +162,7 @@ class Sequence_gre:
             gx_pre,
             os.path.join(waveform_dir, "gx_pre.yml"),
             raster_time,
-            self.PRECISION,
+            self.precision,
             ps.gamma,
         )
 
@@ -170,7 +176,7 @@ class Sequence_gre:
             gz_reph,
             os.path.join(waveform_dir, "gz_reph.yml"),
             raster_time,
-            self.PRECISION,
+            self.precision,
             ps.gamma,
         )
         phase_areas = (np.arange(ny) - ny / 2) * delta_k
@@ -183,7 +189,7 @@ class Sequence_gre:
             gx_spoil,
             os.path.join(waveform_dir, "gx_spoil.yml"),
             raster_time,
-            self.PRECISION,
+            self.precision,
             ps.gamma,
         )
 
@@ -196,7 +202,7 @@ class Sequence_gre:
             gz_spoil,
             os.path.join(waveform_dir, "gz_spoil.yml"),
             raster_time,
-            self.PRECISION,
+            self.precision,
             ps.gamma,
         )
 
@@ -271,7 +277,7 @@ class Sequence_gre:
                 gy_pre,
                 os.path.join(waveform_dir, f"gy_pre{i}.yml"),
                 raster_time,
-                self.PRECISION,
+                self.precision,
                 ps.gamma,
             )
 
@@ -310,7 +316,7 @@ class Sequence_gre:
                 gy_pre,
                 os.path.join(waveform_dir, f"gy_reph{i}.yml"),
                 raster_time,
-                self.PRECISION,
+                self.precision,
                 ps.gamma,
             )
 

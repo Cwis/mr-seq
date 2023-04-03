@@ -15,7 +15,7 @@ class PhysicalSetup(Configuration):
 
     def __init__(self, configuration_filename: str = ""):
         self.adc_dead_time: float = 0
-        self.b0: float = 1.5
+        self.b_zero: float = 1.5
         self.gamma: float = 42.576e6
         self.grad_raster_time: float = 10e-6
         self.grad_unit: str = "Hz/m"

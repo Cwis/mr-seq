@@ -1,6 +1,4 @@
-import os.path
 from pathlib import Path
-import yaml
 
 from mr_seq.configuration import Configuration
 
@@ -26,8 +24,6 @@ class Sequences(Configuration):
     SEQUENCE_CLASS = "Sequence_"
 
     def check_configuration(self) -> bool:
-        print("Check seq config")
-
         # Check all required keys are in the file
         if any([key not in self.configuration for key in self.configuration_keys]):
             print(
@@ -37,8 +33,9 @@ class Sequences(Configuration):
 
         # Check sequences directory exists
         seq_dir = Path(self.configuration["sequences_directory"])
-        if seq_dir.is_dir():
-            print("Directory of sequences exists")
+        if not (seq_dir.is_dir()):
+            print(f"ERROR: directory of sequences does not exist: {seq_dir}")
+            return False
 
         # Get the names of all sequences and check that the corresponding generator file exists
         for seq in self.configuration["sequences"]:
@@ -47,7 +44,6 @@ class Sequences(Configuration):
             seq_module = f"{seq['name']}{self.SEQUENCE_SUFFIX}"
             seq_filename = f"{seq_module}.py"
             seq_class = f"{self.SEQUENCE_CLASS}{seq_name}"
-            # print(f"seq: {seq_name}; with generator: {seq_generator}")
             seq_generator_path = seq_dir / seq_filename
             if not seq_generator_path.is_file():
                 print(
@@ -68,7 +64,9 @@ class Sequences(Configuration):
 
             # Check the import worked
             sc = SequenceClass()
-            print(sc.check())
+            if not sc.check():
+                print(f"ERROR: cannot check the SequenceClass: {seq_class}")
+                return False
 
         return True
 
@@ -81,7 +79,6 @@ class Sequences(Configuration):
         ]
 
         # read the configuration file containing the available sequences
-
         self.configuration_filename: str = configuration_filename
         if configuration_filename == "":
             self.configuration_filename = self.__default_sequences_filename

@@ -47,17 +47,15 @@ class SequenceGenerator:
             return False
 
         # Get the seq type generator
-        sequence_generator = self.available_sequences.SEQUENCE_GENERATORS[
-            self.available_sequences.SEQUENCE_TYPES.index(sequence_type)
-        ]
-        print(sequence_generator)
+        # sequence_generator = self.available_sequences.SEQUENCE_GENERATORS[
+        #     self.available_sequences.SEQUENCE_TYPES.index(sequence_type)
+        # ]
 
         # Get the seq type class
         SequenceClass = self.available_sequences.SEQUENCE_CLASSES[
             self.available_sequences.SEQUENCE_TYPES.index(sequence_type)
         ]
         sc = SequenceClass()
-        print(sc.check())
 
         # Generate the sequence using the parameters and the loaded SequenceClass
         sc.generate(
@@ -70,12 +68,3 @@ class SequenceGenerator:
         )
 
         return True
-        # return seqs.generate_sequence(
-        #     sequence_type,
-        #     matrix_shape,
-        #     title,
-        #     outdir,
-        #     physics_configuration_filename,
-        #     timestep,
-        #     verbal,
-        # )
