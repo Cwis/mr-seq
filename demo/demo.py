@@ -12,13 +12,11 @@ seq_gen = SequenceGenerator()
 print(f"Demo of the mr-seq module (v{SequenceGenerator.version()})")
 print(f"Currently available sequences are: {seq_gen.get_sequences()}")
 
-print(os.path.dirname(os.path.realpath(__file__)))
-
-# Generate a GRE seq with parameters from the gre_demo_configuration file
+# 1. Generate a GRE seq with parameters from the gre_demo_configuration file
 
 GRE_matrix_shape = (1, 7, 7)
 title = "GRE_demo"
-outdir = "GRE_demo"
+outdir = "demo"
 physics_parameters = "demo/gre_demo_configuration.yml"
 timestep = 1e-6
 verbal = True
@@ -27,7 +25,7 @@ gre_res = seq_gen.generate(
     "gre", GRE_matrix_shape, title, outdir, physics_parameters, timestep, verbal
 )
 
-# Generate a "border" seq with paramaters from the border_demo_configuration file
+# 2. Generate a "border" seq with parameters from the border_demo_configuration file
 
 matrix_shape = (1, 7, 7)
 title = "border_demo"
