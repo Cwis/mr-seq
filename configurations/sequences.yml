@@ -1,15 +1,4 @@
-title: Physical setup for the GRE demo example of mr-seq
-gyro: 42577.0
-b_zero: 0.1
-timestep: 1e-6
-adc_dead_time: 0
-grad_raster_time: 10e-6
-grad_unit: "mT/m"
-max_grad: 50
-max_slew: 20
-rf_dead_time: 0
-rf_raster_time: 1e-6
-rf_ringdown_time: 0
-rise_time: 0
-slew_unit: "T/m/s"
-loc_spacing: 0.00429 # m
+title: List of available sequences
+sequences_directory: "src/mr_seq/sequences"
+sequences:
+    - name: gre
