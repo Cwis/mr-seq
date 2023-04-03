@@ -1,6 +1,4 @@
 import os
-import numpy as np
-import pypulseq as pp
 import yaml
 from matplotlib import pyplot as plt
 
@@ -79,8 +77,8 @@ class Sequence_gre:
         slice_thickness = 3e-3
 
         # Timing
-        TE = 4.3e-3  # np.array([4.3e-3])
-        TR = 10e-3
+        TE = 5e-3  # np.array([4.3e-3])
+        TR = 15e-3
 
         # RF spoiling increment (117 or 123)
         rf_spoiling_inc = 117
@@ -99,7 +97,7 @@ class Sequence_gre:
             duration=3e-3,  # TODO check ms
             slice_thickness=slice_thickness,
             apodization=0.5,
-            time_bw_product=4,
+            time_bw_product=8,
             system=system,
             return_gz=True,
         )  # TBW=2 (rapid imaging), =4 (180), =8 (90), =12 (slab and saturation)
@@ -168,7 +166,7 @@ class Sequence_gre:
 
         # Rephasing gradient
         gz_reph = pp.make_trapezoid(
-            channel="z", area=-gz.area / 2, duration=1e-3, system=system
+            channel="z", area=-gz.area / 2, duration=2e-3, system=system
         )
 
         # Convert gradient to waveform in the format of the GammaMRI-Simulator
@@ -365,7 +363,7 @@ class Sequence_gre:
             t_excitation,
             t_refocusing,
             t_adc,
-        ) = seq_pypulseq.calculate_kspace()
+        ) = seq_pypulseq.calculate_kspacePP()
         time_axis = np.arange(1, ktraj.shape[1] + 1) * system.grad_raster_time
         plt.figure()
         plt.plot(time_axis, ktraj.T)  # Plot the entire k-space trajectory

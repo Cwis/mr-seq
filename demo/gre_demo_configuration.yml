@@ -5,7 +5,7 @@ timestep: 1e-6
 adc_dead_time: 0
 grad_raster_time: 10e-6
 grad_unit: "mT/m"
-max_grad: 20
+max_grad: 50
 max_slew: 50
 rf_dead_time: 0
 rf_raster_time: 1e-6
