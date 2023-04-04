@@ -73,7 +73,7 @@ class Sequence_gre:
 
         # Define FOV and resolution
         fov = 200e-3
-        alpha = 10  # alpha=°, flip_angle=rad
+        alpha = 90  # alpha=°, flip_angle=rad
         slice_thickness = 3e-3
 
         # Timing
