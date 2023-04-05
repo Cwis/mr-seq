@@ -46,11 +46,6 @@ class SequenceGenerator:
             )
             return False
 
-        # Get the seq type generator
-        # sequence_generator = self.available_sequences.SEQUENCE_GENERATORS[
-        #     self.available_sequences.SEQUENCE_TYPES.index(sequence_type)
-        # ]
-
         # Get the seq type class
         SequenceClass = self.available_sequences.SEQUENCE_CLASSES[
             self.available_sequences.SEQUENCE_TYPES.index(sequence_type)

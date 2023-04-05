@@ -21,7 +21,7 @@ matrix_shape = (1, 7, 7)
 title = "GRE_demo"
 output_directory = f"out/demo/{title}"
 physics_parameters = "demo/gre_demo_configuration.yml"
-clock = 1e-6
+clock = 20e-6
 verbal = True
 
 gre_res = seq_gen.generate(

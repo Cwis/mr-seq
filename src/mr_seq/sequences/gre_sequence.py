@@ -72,9 +72,9 @@ class Sequence_gre:
         nz, ny, nx = matrix_shape
 
         # Define FOV and resolution
-        fov = 200e-3
+        fov = 30e-3
         alpha = 90  # alpha=°, flip_angle=rad
-        slice_thickness = 3e-3
+        slice_thickness = 10e-3
 
         # Timing
         TE = 5e-3  # np.array([4.3e-3])
